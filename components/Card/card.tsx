@@ -23,8 +23,8 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                     <h2 className="body-big font-wt-700 title">{hack.title}</h2>
                     <div className="desc body-small">{hack.desc}</div>
                     <div className="tags-list f-d">
-                        {hack.tags.map((tag) => (
-                            <Tag>{tag}</Tag>
+                        {hack.tags.map((tag, idx) => (
+                            <Tag key={`tag-${idx}`}>{tag}</Tag>
                         ))}
                     </div>
                     <div className="creation-date f-d f-v-c">
@@ -38,8 +38,8 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                     </div>
                 </div>
                 <div className="hack-data f-d">
-                    {votesEmpIds.map((emp_id) => (
-                        <div className="user-image">
+                    {votesEmpIds.map((emp_id, idx) => (
+                        <div className="user-image" key={`user-image-${idx}`}>
                             <Image
                                 src={employeeData[emp_id]?.profile_pic}
                                 alt="usr"

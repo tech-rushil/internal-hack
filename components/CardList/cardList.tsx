@@ -10,7 +10,9 @@ interface CardListProps {
 
 const CardList: NextPage<CardListProps> = ({ hacks, employeeData }) => {
     const renderCards = () => {
-        return hacks.map((ele) => <Card hack={ele} employeeData={employeeData} />);
+        return hacks.map((ele, idx) => (
+            <Card hack={ele} employeeData={employeeData} key={`card-${idx}`} />
+        ));
     };
 
     return <>{renderCards()}</>;
