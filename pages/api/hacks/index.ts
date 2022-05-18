@@ -40,7 +40,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         // Get the emp_id from body
         let vote_ids: number[] = [];
         Hacks.forEach((hack) => {
-            vote_ids = [...vote_ids, ...hack.votes_ids];
+            // adding the user created to vote id + votes_id
+            vote_ids = [...vote_ids, ...hack.votes_ids, hack.created_by.emp_id];
         });
 
         let unique_vote_ids: any = new Set(vote_ids);
@@ -52,7 +53,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         unique_vote_ids.forEach((vote_id: number) => {
             let user = Users.find((u) => u.emp_id === vote_id);
             if (user?.profile_pic) {
-                employee_data[vote_id] = user.profile_pic;
+                employee_data[vote_id] = {
+                    profile_pic: user.profile_pic,
+                    name: user.name,
+                };
             }
         });
 

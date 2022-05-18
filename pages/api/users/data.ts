@@ -8,12 +8,12 @@ export const Users: UserInterface[] = [
     {
         emp_id: 10001,
         name: "John Doe",
-        profile_pic: "https://randomuser.me/api/portraits/men/83.jpg",
+        profile_pic: "https://randomuser.me/api/portraits/men/78.jpg",
     },
     {
         emp_id: 10002,
         name: "Alicia",
-        profile_pic: "https://randomuser.me/api/portraits/women/60.jpg",
+        profile_pic: "https://randomuser.me/api/portraits/women/63.jpg",
     },
     {
         emp_id: 10003,
@@ -42,7 +42,12 @@ export const Users: UserInterface[] = [
     },
     {
         emp_id: 10008,
-        name: "James",
+        name: "Dobby",
+        profile_pic: "https://randomuser.me/api/portraits/men/88.jpg",
+    },
+    {
+        emp_id: 10009,
+        name: "Bill",
         profile_pic: "https://randomuser.me/api/portraits/men/88.jpg",
     },
 ];
