@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { HacksInterface } from "../../pages/api/hacks/data";
+import moment from "moment";
 
 interface CardProps {
     hack: HacksInterface;
@@ -25,7 +26,9 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                             {employeeData[hack.created_by.emp_id]?.name}
                         </div>
                         <div className="dot"></div>
-                        <div className="date body-caption">3 Hours Ago</div>
+                        <div className="date body-caption">
+                            {moment(hack.created_by.date * 1000).fromNow()}
+                        </div>
                     </div>
                 </div>
                 <div className="hack-data f-d">

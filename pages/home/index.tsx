@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../../components/Card/card";
 import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
 
