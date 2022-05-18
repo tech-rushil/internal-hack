@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import React from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { HacksInterface } from "../../pages/api/hacks/data";
 import moment from "moment";
 import Tag from "../Tag/tag";
@@ -14,6 +14,10 @@ interface CardProps {
 
 const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
     let votesEmpIds = hack.votes_ids.slice(0, 4);
+    let votedClassName = "";
+
+    // TODO hardcoded for now
+    if (hack.votes_ids.includes(10001)) votedClassName = "voted";
 
     return (
         <>
@@ -53,10 +57,24 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                         {hack.total_votes}
                     </div>
                     <div
-                        className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c"
+                        className={`upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c ${votedClassName}`}
                         data-hackid={hack.hack_id}
                     >
-                        <FontAwesomeIcon icon={faChevronUp} style={{ pointerEvents: "none" }} />
+                        <FontAwesomeIcon
+                            icon={faChevronUp}
+                            style={{
+                                pointerEvents: "none",
+                                display: votedClassName === "" ? "block" : "none",
+                            }}
+                            className={"custom-up-icon"}
+                        />
+                        <FontAwesomeIcon
+                            icon={faCheck}
+                            style={{
+                                pointerEvents: "none",
+                                display: votedClassName !== "" ? "block" : "none",
+                            }}
+                        />
                     </div>
                 </div>
             </div>
@@ -110,12 +128,27 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                     height: 60px;
                     border-radius: 50%;
                     border: 1px solid var(--gray);
+                    font-size: 20px;
+                }
+
+                .hack-card .votes {
+                    font-weight: 700;
                 }
 
                 .divider {
                     margin: 32px 0px;
                     width: 100%;
                     border-bottom: 2px solid var(--shell);
+                }
+
+                .upvote-btn {
+                    transition: all 0.2s;
+                }
+
+                .hack-card .voted {
+                    background-color: var(--pink-shade-1);
+                    color: var(--dove);
+                    border-color: var(--pink-shade-1);
                 }
             `}</style>
         </>
