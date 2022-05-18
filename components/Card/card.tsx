@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { HacksInterface } from "../../pages/api/hacks/data";
 import moment from "moment";
+import Tag from "../Tag/tag";
 
 interface CardProps {
     hack: HacksInterface;
@@ -21,6 +22,11 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                 <div className="hack-details">
                     <h2 className="body-big font-wt-700 title">{hack.title}</h2>
                     <div className="desc body-small">{hack.desc}</div>
+                    <div className="tags-list f-d">
+                        {hack.tags.map((tag) => (
+                            <Tag>{tag}</Tag>
+                        ))}
+                    </div>
                     <div className="creation-date f-d f-v-c">
                         <div className="author body-caption">
                             {employeeData[hack.created_by.emp_id]?.name}
@@ -32,7 +38,7 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                     </div>
                 </div>
                 <div className="hack-data f-d">
-                    {hack.votes_ids.map((emp_id) => (
+                    {votesEmpIds.map((emp_id) => (
                         <div className="user-image">
                             <Image
                                 src={employeeData[emp_id]?.profile_pic}
@@ -43,7 +49,6 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                             />
                         </div>
                     ))}
-
                     <div className="votes round-circle-border f-d f-h-c f-v-c">
                         {hack.total_votes}
                     </div>
@@ -58,6 +63,10 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                     gap: 24px;
                 }
 
+                .hack-card .tags-list {
+                    margin-top: 10px;
+                }
+
                 .hack-card .hack-id {
                     margin-top: 4px;
                 }
@@ -69,7 +78,7 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
 
                 .hack-card .creation-date {
                     gap: 8px;
-                    margin-top: 8px;
+                    margin-top: 10px;
                 }
 
                 .hack-card .creation-date .dot {
