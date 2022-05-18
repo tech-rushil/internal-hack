@@ -7,10 +7,15 @@ interface CardProps {}
 const Card: NextPage<CardProps> = () => {
     return (
         <>
-            <div className="hack-card f-d f-v-c">
+            <div className="hack-card f-d f-v-s">
                 <div className="hack-id">1</div>
                 <div className="hack-details">
-                    <h2 className="body-big">Control,Alt,Delete</h2>
+                    <h2 className="body-big font-wt-700 title">Control,Alt,Delete</h2>
+                    <div className="desc body-small">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum
+                        faucibus.
+                    </div>
                     <div className="creation-date f-d f-v-c">
                         <div className="author body-caption">Rushil</div>
                         <div className="dot"></div>
@@ -20,7 +25,7 @@ const Card: NextPage<CardProps> = () => {
                 <div className="hack-data f-d">
                     <div className="user-image">
                         <Image
-                            src="https://randomuser.me/api/portraits/men/81.jpg"
+                            src="https://randomuser.me/api/portraits/women/80.jpg"
                             alt="usr"
                             objectFit="contain"
                             width={60}
@@ -38,7 +43,7 @@ const Card: NextPage<CardProps> = () => {
                     </div>
                     <div className="user-image">
                         <Image
-                            src="https://randomuser.me/api/portraits/men/81.jpg"
+                            src="https://randomuser.me/api/portraits/women/82.jpg"
                             alt="usr"
                             objectFit="contain"
                             width={60}
@@ -47,7 +52,7 @@ const Card: NextPage<CardProps> = () => {
                     </div>
                     <div className="user-image">
                         <Image
-                            src="https://randomuser.me/api/portraits/men/81.jpg"
+                            src="https://randomuser.me/api/portraits/men/83.jpg"
                             alt="usr"
                             objectFit="contain"
                             width={60}
@@ -59,9 +64,19 @@ const Card: NextPage<CardProps> = () => {
                     <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c"></div>
                 </div>
             </div>
+            <div className="divider" />
             <style jsx>{`
                 .hack-card {
                     gap: 24px;
+                }
+
+                .hack-card .hack-id {
+                    margin-top: 4px;
+                }
+
+                .hack-card .hack-details .title {
+                    margin-bottom: 8px;
+                    letter-spacing: 2px;
                 }
 
                 .hack-card .creation-date {
@@ -94,6 +109,12 @@ const Card: NextPage<CardProps> = () => {
                     height: 60px;
                     border-radius: 50%;
                     border: 1px solid var(--gray);
+                }
+
+                .divider {
+                    margin: 32px 0px;
+                    width: 100%;
+                    border-bottom: 2px solid var(--shell);
                 }
             `}</style>
         </>
