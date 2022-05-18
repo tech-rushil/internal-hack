@@ -1,73 +1,70 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import React from "react";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { HacksInterface } from "../../pages/api/hacks/data";
+import moment from "moment";
+import Tag from "../Tag/tag";
 
-interface CardProps {}
+interface CardProps {
+    hack: HacksInterface;
+    employeeData: any;
+}
 
-const Card: NextPage<CardProps> = () => {
+const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
+    let votesEmpIds = hack.votes_ids.slice(0, 4);
+
     return (
         <>
             <div className="hack-card f-d f-v-s">
-                <div className="hack-id">1</div>
+                <div className="hack-id">{hack.hack_id}</div>
                 <div className="hack-details">
-                    <h2 className="body-big font-wt-700 title">Control,Alt,Delete</h2>
-                    <div className="desc body-small">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum
-                        faucibus.
+                    <h2 className="body-big font-wt-700 title">{hack.title}</h2>
+                    <div className="desc body-small">{hack.desc}</div>
+                    <div className="tags-list f-d">
+                        {hack.tags.map((tag, idx) => (
+                            <Tag key={`tag-${idx}`}>{tag}</Tag>
+                        ))}
                     </div>
                     <div className="creation-date f-d f-v-c">
-                        <div className="author body-caption">Rushil</div>
+                        <div className="author body-caption">
+                            {employeeData[hack.created_by.emp_id]?.name}
+                        </div>
                         <div className="dot"></div>
-                        <div className="date body-caption">3 Hours Ago</div>
+                        <div className="date body-caption">
+                            {moment(hack.created_by.date * 1000).fromNow()}
+                        </div>
                     </div>
                 </div>
                 <div className="hack-data f-d">
-                    <div className="user-image">
-                        <Image
-                            src="https://randomuser.me/api/portraits/women/80.jpg"
-                            alt="usr"
-                            objectFit="contain"
-                            width={60}
-                            height={60}
-                        />
+                    {votesEmpIds.map((emp_id, idx) => (
+                        <div className="user-image" key={`user-image-${idx}`}>
+                            <Image
+                                src={employeeData[emp_id]?.profile_pic}
+                                alt="usr"
+                                objectFit="contain"
+                                width={60}
+                                height={60}
+                            />
+                        </div>
+                    ))}
+                    <div className="votes round-circle-border f-d f-h-c f-v-c">
+                        {hack.total_votes}
                     </div>
-                    <div className="user-image">
-                        <Image
-                            src="https://randomuser.me/api/portraits/men/81.jpg"
-                            alt="usr"
-                            objectFit="contain"
-                            width={60}
-                            height={60}
-                        />
+                    <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c">
+                        <FontAwesomeIcon icon={faChevronUp} />
                     </div>
-                    <div className="user-image">
-                        <Image
-                            src="https://randomuser.me/api/portraits/women/82.jpg"
-                            alt="usr"
-                            objectFit="contain"
-                            width={60}
-                            height={60}
-                        />
-                    </div>
-                    <div className="user-image">
-                        <Image
-                            src="https://randomuser.me/api/portraits/men/83.jpg"
-                            alt="usr"
-                            objectFit="contain"
-                            width={60}
-                            height={60}
-                        />
-                    </div>
-
-                    <div className="votes round-circle-border f-d f-h-c f-v-c">4</div>
-                    <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c"></div>
                 </div>
             </div>
             <div className="divider" />
             <style jsx>{`
                 .hack-card {
                     gap: 24px;
+                }
+
+                .hack-card .tags-list {
+                    margin-top: 10px;
                 }
 
                 .hack-card .hack-id {
@@ -81,7 +78,7 @@ const Card: NextPage<CardProps> = () => {
 
                 .hack-card .creation-date {
                     gap: 8px;
-                    margin-top: 8px;
+                    margin-top: 10px;
                 }
 
                 .hack-card .creation-date .dot {
@@ -95,6 +92,7 @@ const Card: NextPage<CardProps> = () => {
                     flex-grow: 1;
                     justify-content: end;
                     gap: 16px;
+                    width: 36%;
                 }
 
                 .hack-card .hack-data .user-image {
