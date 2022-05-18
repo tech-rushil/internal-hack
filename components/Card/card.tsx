@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 interface CardProps {}
 
@@ -61,7 +63,9 @@ const Card: NextPage<CardProps> = () => {
                     </div>
 
                     <div className="votes round-circle-border f-d f-h-c f-v-c">4</div>
-                    <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c"></div>
+                    <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c">
+                        <FontAwesomeIcon icon={faChevronUp} />
+                    </div>
                 </div>
             </div>
             <div className="divider" />
