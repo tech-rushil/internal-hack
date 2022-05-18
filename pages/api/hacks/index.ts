@@ -24,8 +24,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                     if (hack.votes_ids.includes(vote_id)) {
                         let index = hack.votes_ids.indexOf(vote_id);
                         hack.votes_ids.splice(index, 1);
+                        hack.total_votes -= 1;
                     } else {
                         hack.votes_ids = [...hack.votes_ids, vote_id];
+                        hack.total_votes += 1;
                     }
                 }
             });
