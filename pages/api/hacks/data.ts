@@ -56,7 +56,7 @@ export const Hacks: HacksInterface[] = [
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum faucibus.",
         tags: ["Java", "Feature", "Javascript"],
         votes_ids: [10006],
-        total_votes: 3,
+        total_votes: 1,
         created_by: {
             emp_id: 10003,
             date: 1652860206,
@@ -68,7 +68,7 @@ export const Hacks: HacksInterface[] = [
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum faucibus.",
         tags: ["Fix"],
         votes_ids: [10002],
-        total_votes: 3,
+        total_votes: 1,
         created_by: {
             emp_id: 10004,
             date: 1652860206,

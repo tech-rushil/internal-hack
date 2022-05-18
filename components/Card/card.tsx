@@ -41,7 +41,9 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                         </div>
                     ))}
 
-                    <div className="votes round-circle-border f-d f-h-c f-v-c">4</div>
+                    <div className="votes round-circle-border f-d f-h-c f-v-c">
+                        {hack.total_votes}
+                    </div>
                     <div className="upvote-btn round-circle-border c-pointer f-d f-h-c f-v-c">
                         <FontAwesomeIcon icon={faChevronUp} />
                     </div>
