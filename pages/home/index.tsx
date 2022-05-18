@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { useEffect } from "react";
 import axios from "axios";
+import Card from "../../components/Card/card";
 
 interface HomeProps {}
 
@@ -13,7 +14,16 @@ const Home: NextPage<HomeProps> = () => {
 
     return (
         <>
-            <div className="">home-page</div>
+            <div className="lr-pad-d lr-pad-m">
+                <div className="card-list">
+                    <Card />
+                </div>
+            </div>
+            <style jsx>{`
+                .card-list {
+                    margin-top: 4rem;
+                }
+            `}</style>
         </>
     );
 };

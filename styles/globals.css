@@ -1,6 +1,13 @@
 /* Root Variables */
 
 :root {
+    --batman: #212121;
+    --carbon: #000000;
+    --carbon-shade-1: #1c2024;
+    --carbon-shade-2: #17191b;
+    --carbon-shade-3: #23292d;
+    --carbon-light: #373737;
+    --granite: #696969;
     --flamingo: #ff7350;
     --amber: #fec358;
     --crayola: #f9f4e8;
@@ -128,13 +135,13 @@ h3,
 h4,
 h5 {
     font-weight: 500;
-    color: var(--prussion) !important;
-    font-family: "Poppins", sans-serif !important;
+    color: var(--carbon) !important;
+    font-family: "Inter", sans-serif !important;
 }
 
 .h1-heading {
     font-size: calc((102% + 0.25vw) * 2);
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .h2-heading {
@@ -165,37 +172,37 @@ h5 {
 
 .body-xl {
     font-size: 48px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-large {
     font-size: 24px;
     line-height: 34px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-big {
     font-size: 20px;
     line-height: 28px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-medium {
     font-size: 18px;
     line-height: 25px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-regular {
     font-size: 16px;
     line-height: 22px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-small {
     font-size: 14px;
     line-height: 20px;
-    color: var(--prussion);
+    color: var(--carbon);
 }
 
 .body-caption {
