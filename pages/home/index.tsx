@@ -51,7 +51,7 @@ const Home: NextPage<HomeProps> = () => {
             <div className="lr-pad-d lr-pad-m">
                 <div className="create-form">
                     <div className="title h1-heading">Create a new hack</div>
-                    <CreateHackForm />
+                    <CreateHackForm fetchHacks={fetchHacks} />
                 </div>
 
                 <div className="card-list" onClickCapture={handleUpVotes}>

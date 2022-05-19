@@ -1,20 +1,47 @@
 import type { NextPage } from "next";
 import * as React from "react";
 import { Form, Input, Button, Select } from "antd";
+import axios from "axios";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-interface CreateHackFormProps {}
+interface CreateHackFormProps {
+    fetchHacks: () => void;
+}
 
-const CreateHackForm: NextPage<CreateHackFormProps> = () => {
+const CreateHackForm: NextPage<CreateHackFormProps> = ({ fetchHacks }) => {
+    const [form] = Form.useForm();
+
+    const onFinish = (values: any) => {
+        form.resetFields();
+        axios
+            .post("/api/hacks", {
+                title: values.title,
+                tags: values.tags,
+                desc: values.desc,
+                emp_id: 10003,
+            })
+            .then((res) => {
+                console.log(res);
+                fetchHacks();
+            });
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log("Failed:", errorInfo);
+    };
+
+    const tags = ["Tech", "Future", "Javascript", "Java", "Feature", "Fix"];
+
     return (
         <>
             <Form
+                form={form}
                 name="create-hack"
                 initialValues={{ remember: true }}
-                onFinish={() => {}}
-                onFinishFailed={() => {}}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <div className="input-row">
@@ -52,12 +79,11 @@ const CreateHackForm: NextPage<CreateHackFormProps> = () => {
                             placeholder="select one tag"
                             optionLabelProp="label"
                         >
-                            <Option value="china" label="China">
-                                China
-                            </Option>
-                            <Option value="usa" label="USA">
-                                USA
-                            </Option>
+                            {tags.map((ele, idx) => (
+                                <Option key={idx} value={ele}>
+                                    {ele}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                 </div>

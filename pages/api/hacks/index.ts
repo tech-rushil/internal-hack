@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import moment from "moment";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Users } from "../users/data";
 import { Hacks } from "./data";
@@ -12,7 +13,28 @@ type Data = {
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { method, body } = req;
 
-    res.setHeader("Allow", ["GET", "PUT"]);
+    res.setHeader("Allow", ["GET", "PUT", "POST"]);
+
+    if (method === "POST") {
+        if (body?.title && body?.desc && body?.tags) {
+            let lastHackId = Hacks.at(-1)?.hack_id;
+            lastHackId = lastHackId ? lastHackId : 1;
+            Hacks.unshift({
+                hack_id: lastHackId + 1,
+                title: body.title,
+                desc: body.desc,
+                tags: body.tags,
+                votes_ids: [],
+                total_votes: 0,
+                created_by: {
+                    emp_id: body.emp_id,
+                    date: Number(moment.now() / 1000),
+                },
+            });
+
+            return res.status(200).send({ status: 1, msg: "Hack created", data: null });
+        }
+    }
 
     if (method === "PUT") {
         if (body?.hack_id && body?.vote_id) {

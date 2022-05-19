@@ -10,9 +10,10 @@ import Tag from "../Tag/tag";
 interface CardProps {
     hack: HacksInterface;
     employeeData: any;
+    idx: number;
 }
 
-const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
+const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
     let votesEmpIds = hack.votes_ids.slice(0, 4);
     let votedClassName = "";
 
@@ -22,7 +23,7 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
     return (
         <>
             <div className="hack-card f-d f-v-s">
-                <div className="hack-id">{hack.hack_id}</div>
+                <div className="hack-id">{idx}</div>
                 <div className="hack-details">
                     <h2 className="body-big font-wt-700 title">{hack.title}</h2>
                     <div className="desc body-small">{hack.desc}</div>
@@ -89,7 +90,9 @@ const Card: NextPage<CardProps> = ({ hack, employeeData }) => {
                 }
 
                 .hack-card .hack-id {
-                    margin-top: 4px;
+                    margin-top: -2px;
+                    font-weight: 500;
+                    font-size: 20px;
                 }
 
                 .hack-card .hack-details .title {
