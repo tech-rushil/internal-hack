@@ -17,10 +17,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
     if (method === "POST") {
         if (body?.title && body?.desc && body?.tags) {
-            let lastHackId = Hacks.at(-1)?.hack_id;
-            lastHackId = lastHackId ? lastHackId : 1;
+            let lastHackId = Hacks.length + 1;
             Hacks.unshift({
-                hack_id: lastHackId + 1,
+                hack_id: lastHackId,
                 title: body.title,
                 desc: body.desc,
                 tags: body.tags,
