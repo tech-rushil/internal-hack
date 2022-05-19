@@ -4,6 +4,7 @@ import axios from "axios";
 import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
 import CreateHackForm from "../../components/Form/createHackForm";
+import Sorter from "../../components/Sorter/sorter";
 
 interface HomeProps {}
 
@@ -11,8 +12,8 @@ const Home: NextPage<HomeProps> = () => {
     const [hacks, setHacks] = useState<HacksInterface[]>([]);
     const [employeeData, setEmployeeData] = useState<any>({});
 
-    const fetchHacks = () => {
-        axios.get("/api/hacks").then((res) => {
+    const fetchHacks = (sortby: string = "date", order: string = "desc") => {
+        axios.get("/api/hacks", { params: { sortby, order } }).then((res) => {
             if (res?.data?.data?.hacks) {
                 console.log("hello here", res.data.data.hacks);
                 setHacks(res.data.data.hacks);
@@ -53,7 +54,9 @@ const Home: NextPage<HomeProps> = () => {
                     <div className="title h1-heading">Create a new hack</div>
                     <CreateHackForm fetchHacks={fetchHacks} />
                 </div>
-
+                <div className="sort-row f-d f-h-e">
+                    <Sorter fetchHacks={fetchHacks} />
+                </div>
                 <div className="card-list" onClickCapture={handleUpVotes}>
                     <CardList hacks={hacks} employeeData={employeeData} />
                 </div>
