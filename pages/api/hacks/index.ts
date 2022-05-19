@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import moment from "moment";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Users } from "../users/data";
-import { Hacks } from "./data";
+import { Hacks, HacksInterface } from "./data";
+import _ from "lodash";
 
 type Data = {
     status: number;
@@ -10,9 +12,29 @@ type Data = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    const { method, body } = req;
+    const { method, body, query } = req;
 
-    res.setHeader("Allow", ["GET", "PUT"]);
+    res.setHeader("Allow", ["GET", "PUT", "POST"]);
+
+    if (method === "POST") {
+        if (body?.title && body?.desc && body?.tags) {
+            let lastHackId = Hacks.length + 1;
+            Hacks.unshift({
+                hack_id: lastHackId,
+                title: body.title,
+                desc: body.desc,
+                tags: body.tags,
+                votes_ids: [],
+                total_votes: 0,
+                created_by: {
+                    emp_id: body.emp_id,
+                    date: Number(moment.now() / 1000),
+                },
+            });
+
+            return res.status(200).send({ status: 1, msg: "Hack created", data: null });
+        }
+    }
 
     if (method === "PUT") {
         if (body?.hack_id && body?.vote_id) {
@@ -37,6 +59,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 
     if (method === "GET") {
+        console.log(query);
+
         // Get the emp_id from body
         let vote_ids: number[] = [];
         Hacks.forEach((hack) => {
@@ -60,9 +84,25 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             }
         });
 
+        let final_hacks: HacksInterface[] = Hacks;
+
+        if (query?.order && (query?.order === "asc" || query?.order === "desc")) {
+            switch (query?.sortby) {
+                case "date":
+                    final_hacks = _.orderBy(Hacks, ["created_by.date"], [query.order]);
+                    break;
+                case "votes":
+                    final_hacks = _.orderBy(Hacks, ["total_votes"], [query.order]);
+                    break;
+                default:
+                    final_hacks = Hacks;
+                    break;
+            }
+        }
+
         return res
             .status(200)
-            .send({ status: 1, msg: "Hacks Fetched", data: { employee_data, hacks: Hacks } });
+            .send({ status: 1, msg: "Hacks Fetched", data: { employee_data, hacks: final_hacks } });
     }
 
     return res.status(405).end(`Method ${method} Not Allowed`);

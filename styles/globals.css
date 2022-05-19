@@ -22,6 +22,7 @@
     --smoke: #f7f7fc;
     --shell: #eff0f6;
     --dove: #ffffff;
+    --pink-shade-1: #e72b4b;
     --btn-p-hover: #e7694a;
     --peaky-shadow-nav: 0px 5px 11px 0px rgba(50, 50, 50, 0.08);
     --peaky-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
@@ -86,6 +87,22 @@ button {
 #root {
     margin-top: 112px;
     overflow-x: hidden;
+}
+
+.upvote-btn:hover .custom-up-icon {
+    transform: translateY(-1px);
+    font-size: 24px;
+    transition: all 0.2s;
+}
+
+.submit-btn {
+    all: unset;
+    background: var(--pink-shade-1) !important;
+    border: unset !important;
+    width: 200px;
+    height: 56px;
+    border-radius: 6px;
+    margin-top: 16px;
 }
 
 ::-webkit-scrollbar {
