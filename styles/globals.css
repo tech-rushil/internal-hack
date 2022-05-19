@@ -95,6 +95,16 @@ button {
     transition: all 0.2s;
 }
 
+.submit-btn {
+    all: unset;
+    background: var(--pink-shade-1) !important;
+    border: unset !important;
+    width: 200px;
+    height: 56px;
+    border-radius: 6px;
+    margin-top: 16px;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }

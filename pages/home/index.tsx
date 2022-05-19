@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
+import CreateHackForm from "../../components/Form/createHackForm";
 
 interface HomeProps {}
 
@@ -48,13 +49,29 @@ const Home: NextPage<HomeProps> = () => {
     return (
         <>
             <div className="lr-pad-d lr-pad-m">
+                <div className="create-form">
+                    <div className="title h1-heading">Create a new hack</div>
+                    <CreateHackForm />
+                </div>
+
                 <div className="card-list" onClickCapture={handleUpVotes}>
                     <CardList hacks={hacks} employeeData={employeeData} />
                 </div>
             </div>
             <style jsx>{`
+                .create-form {
+                    margin-top: 2rem;
+                }
+
                 .card-list {
                     margin-top: 4rem;
+                }
+
+                .title {
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    margin-bottom: 24px;
+                    color: var(--pink-shade-1);
                 }
             `}</style>
         </>
