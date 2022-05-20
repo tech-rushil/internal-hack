@@ -18,3 +18,9 @@
     color: var(--dove);
     width: 100%;
 }
+
+@media only screen and (max-device-width: 760px) {
+    .login-form {
+        width: 80%;
+    }
+}

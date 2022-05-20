@@ -24,7 +24,6 @@ const CreateHackForm: NextPage<CreateHackFormProps> = ({ fetchHacks }) => {
                 emp_id: __getCookie("hack_emp_id").cookieValue,
             })
             .then((res) => {
-                console.log(res);
                 fetchHacks();
             });
     };
