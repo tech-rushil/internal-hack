@@ -32,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                 },
             });
 
-            return res.status(200).send({ status: 1, msg: "Hack created", data: null });
+            return res.status(200).json({ status: 1, msg: "Hack created", data: null });
         }
     }
 
@@ -54,7 +54,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                 }
             });
 
-            return res.status(200).send({ status: 1, msg: "Updated Votes", data: null });
+            return res.status(200).json({ status: 1, msg: "Updated Votes", data: null });
         }
     }
 
@@ -100,7 +100,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
         return res
             .status(200)
-            .send({ status: 1, msg: "Hacks Fetched", data: { employee_data, hacks: final_hacks } });
+            .json({ status: 1, msg: "Hacks Fetched", data: { employee_data, hacks: final_hacks } });
     }
 
     return res.status(405).end(`Method ${method} Not Allowed`);
