@@ -59,8 +59,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
 
     if (method === "GET") {
-        console.log(query);
-
         // Get the emp_id from body
         let vote_ids: number[] = [];
         Hacks.forEach((hack) => {

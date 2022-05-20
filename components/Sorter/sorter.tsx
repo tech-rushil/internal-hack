@@ -16,7 +16,7 @@ const Sorter: NextPage<SorterProps> = ({ fetchHacks }) => {
 
     useEffect(() => {
         fetchHacks(sortBy, order);
-    }, [order, sortBy]);
+    }, [order, sortBy, fetchHacks]);
 
     const handleChange = (value: string) => {
         setSortBy(value);

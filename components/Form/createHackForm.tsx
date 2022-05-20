@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import * as React from "react";
 import { Form, Input, Button, Select } from "antd";
 import axios from "axios";
+import { __getCookie } from "../../utils/cookie.utils";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -20,7 +21,7 @@ const CreateHackForm: NextPage<CreateHackFormProps> = ({ fetchHacks }) => {
                 title: values.title,
                 tags: values.tags,
                 desc: values.desc,
-                emp_id: 10003,
+                emp_id: __getCookie("hack_emp_id").cookieValue,
             })
             .then((res) => {
                 console.log(res);
@@ -97,6 +98,12 @@ const CreateHackForm: NextPage<CreateHackFormProps> = ({ fetchHacks }) => {
             <style jsx>{`
                 .input-row {
                     width: 50%;
+                }
+
+                @media only screen and (max-device-width: 760px) {
+                    .input-row {
+                        width: 100%;
+                    }
                 }
             `}</style>
         </>
