@@ -19,10 +19,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             let empIdToCheck = parseInt(body.empId);
             let user = Users.find((u) => u.emp_id === empIdToCheck);
 
-            if (user) return res.status(200).send({ status: 1, msg: "User verified", data: user });
-            else return res.status(200).send({ status: 0, msg: "User not found", data: null });
+            if (user) return res.status(200).json({ status: 1, msg: "User verified", data: user });
+            else return res.status(200).json({ status: 0, msg: "User not found", data: null });
         }
     }
 
-    return res.status(405).end(`Method ${method} Not Allowed`);
+    res.status(405).end(`Method ${method} Not Allowed`);
 }
