@@ -6,6 +6,7 @@ import { faChevronUp, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { HacksInterface } from "../../pages/api/hacks/data";
 import moment from "moment";
 import Tag from "../Tag/tag";
+import { __getCookie } from "../../utils/cookie.utils";
 
 interface CardProps {
     hack: HacksInterface;
@@ -18,7 +19,8 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
     let votedClassName = "";
 
     // TODO hardcoded for now
-    if (hack.votes_ids.includes(10001)) votedClassName = "voted";
+    if (hack.votes_ids.includes(Number(__getCookie("hack_emp_id").cookieValue)))
+        votedClassName = "voted";
 
     return (
         <>

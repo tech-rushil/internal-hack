@@ -5,6 +5,7 @@ import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
 import CreateHackForm from "../../components/Form/createHackForm";
 import Sorter from "../../components/Sorter/sorter";
+import { __getCookie } from "../../utils/cookie.utils";
 
 interface HomeProps {}
 
@@ -31,12 +32,15 @@ const Home: NextPage<HomeProps> = () => {
 
     const updateVotes = (hack_id: string) => {
         console.log("Hack id", hack_id);
-        axios.put("/api/hacks", { hack_id, vote_id: 10001 }).then((res) => {
-            if (res?.data?.status === 1) {
-                // Votes updated
-                fetchHacks();
-            }
-        });
+
+        axios
+            .put("/api/hacks", { hack_id, vote_id: __getCookie("hack_emp_id").cookieValue })
+            .then((res) => {
+                if (res?.data?.status === 1) {
+                    // Votes updated
+                    fetchHacks();
+                }
+            });
     };
 
     const handleUpVotes = (e: React.MouseEvent<HTMLElement>) => {
@@ -75,6 +79,10 @@ const Home: NextPage<HomeProps> = () => {
                     letter-spacing: 1px;
                     margin-bottom: 24px;
                     color: var(--pink-shade-1);
+                }
+
+                .sort-row {
+                    margin-top: 4rem;
                 }
             `}</style>
         </>
