@@ -6,6 +6,8 @@ import CardList from "../../components/CardList/cardList";
 import CreateHackForm from "../../components/Form/createHackForm";
 import Sorter from "../../components/Sorter/sorter";
 import { __getCookie } from "../../utils/cookie.utils";
+import Router from "next/router";
+import { message } from "antd";
 
 interface HomeProps {}
 
@@ -24,6 +26,13 @@ const Home: NextPage<HomeProps> = () => {
                 setEmployeeData(res.data.data.employee_data);
             }
         });
+    }, []);
+
+    useEffect(() => {
+        if (__getCookie("hack_emp_id").cookieExists === false) {
+            message.warn("Login to continue");
+            Router.replace("/");
+        }
     }, []);
 
     useEffect(() => {
