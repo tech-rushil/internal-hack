@@ -43,17 +43,19 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
                     </div>
                 </div>
                 <div className="hack-data f-d">
-                    {votesEmpIds.map((emp_id, idx) => (
-                        <div className="user-image" key={`user-image-${idx}`}>
-                            <Image
-                                src={employeeData[emp_id]?.profile_pic}
-                                alt="usr"
-                                objectFit="contain"
-                                width={60}
-                                height={60}
-                            />
-                        </div>
-                    ))}
+                    <div className="user-images-container f-d">
+                        {votesEmpIds.map((emp_id, idx) => (
+                            <div className="user-image" key={`user-image-${idx}`}>
+                                <Image
+                                    src={employeeData[emp_id]?.profile_pic}
+                                    alt="usr"
+                                    objectFit="contain"
+                                    width={60}
+                                    height={60}
+                                />
+                            </div>
+                        ))}
+                    </div>
                     <div className="votes round-circle-border f-d f-h-c f-v-c">
                         {hack.total_votes}
                     </div>
@@ -83,6 +85,7 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
             <style jsx>{`
                 .hack-card {
                     gap: 24px;
+                    flex-wrap: wrap;
                 }
 
                 .hack-card .tags-list {
@@ -93,6 +96,10 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
                     margin-top: -2px;
                     font-weight: 500;
                     font-size: 20px;
+                }
+
+                .hack-card .hack-details {
+                    /* width: 80%; */
                 }
 
                 .hack-card .hack-details .title {
@@ -110,6 +117,10 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
                     height: 8px;
                     border-radius: 50px;
                     background-color: var(--gray);
+                }
+
+                .hack-card .hack-data .user-images-container {
+                    gap: 16px;
                 }
 
                 .hack-card .hack-data {
@@ -152,6 +163,34 @@ const Card: NextPage<CardProps> = ({ hack, employeeData, idx }) => {
                     background-color: var(--pink-shade-1);
                     color: var(--dove);
                     border-color: var(--pink-shade-1);
+                }
+
+                @media only screen and (max-device-width: 760px) {
+                    .hack-card {
+                        gap: 8px;
+                        flex-wrap: wrap;
+                    }
+                    .hack-data {
+                        width: 100%;
+                    }
+
+                    .hack-card .hack-details {
+                        width: 90%;
+                    }
+
+                    .hack-card .hack-data {
+                        margin-top: 8px;
+                    }
+
+                    .user-images-container .user-image:nth-child(4) {
+                        display: none;
+                    }
+
+                    .hack-card .hack-data .user-image,
+                    .round-circle-border {
+                        width: 52px;
+                        height: 52px;
+                    }
                 }
             `}</style>
         </>

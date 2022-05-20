@@ -31,8 +31,8 @@ export const Hacks: HacksInterface[] = [
         title: "Hacktoberfest",
         desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl nunc mi ipsum faucibus.",
         tags: ["Tech", "Future", "Bitcoin"],
-        votes_ids: [10001, 10002, 10003],
-        total_votes: 3,
+        votes_ids: [10001, 10002, 10003, 10004, 10005],
+        total_votes: 5,
         created_by: {
             emp_id: 10002,
             date: 1652891628,
