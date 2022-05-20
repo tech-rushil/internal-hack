@@ -18,7 +18,6 @@ const Home: NextPage<HomeProps> = () => {
     const fetchHacks = useCallback((sortby: string = "date", order: string = "desc") => {
         axios.get("/api/hacks", { params: { sortby, order } }).then((res) => {
             if (res?.data?.data?.hacks) {
-                console.log("hello here", res.data.data.hacks);
                 setHacks(res.data.data.hacks);
             }
 
