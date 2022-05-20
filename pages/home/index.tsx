@@ -1,11 +1,13 @@
 import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import router from "next/router";
 import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
 import CreateHackForm from "../../components/Form/createHackForm";
 import Sorter from "../../components/Sorter/sorter";
 import { __getCookie } from "../../utils/cookie.utils";
+import { message } from "antd";
 
 interface HomeProps {}
 
@@ -27,7 +29,12 @@ const Home: NextPage<HomeProps> = () => {
     };
 
     useEffect(() => {
-        fetchHacks();
+        if (__getCookie("hack_emp_id").cookieExists) {
+            fetchHacks();
+        } else {
+            message.warn("Login to continue");
+            router.replace("/");
+        }
     }, []);
 
     const updateVotes = (hack_id: string) => {
