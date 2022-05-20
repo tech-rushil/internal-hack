@@ -35,7 +35,7 @@ const Home: NextPage<HomeProps> = () => {
             message.warn("Login to continue");
             router.replace("/");
         }
-    }, []);
+    }, [fetchHacks]);
 
     const updateVotes = (hack_id: string) => {
         console.log("Hack id", hack_id);
