@@ -1,13 +1,11 @@
 import type { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import router from "next/router";
 import { HacksInterface } from "../api/hacks/data";
 import CardList from "../../components/CardList/cardList";
 import CreateHackForm from "../../components/Form/createHackForm";
 import Sorter from "../../components/Sorter/sorter";
 import { __getCookie } from "../../utils/cookie.utils";
-import { message } from "antd";
 
 interface HomeProps {}
 
@@ -15,7 +13,7 @@ const Home: NextPage<HomeProps> = () => {
     const [hacks, setHacks] = useState<HacksInterface[]>([]);
     const [employeeData, setEmployeeData] = useState<any>({});
 
-    const fetchHacks = (sortby: string = "date", order: string = "desc") => {
+    const fetchHacks = useCallback((sortby: string = "date", order: string = "desc") => {
         axios.get("/api/hacks", { params: { sortby, order } }).then((res) => {
             if (res?.data?.data?.hacks) {
                 console.log("hello here", res.data.data.hacks);
@@ -26,15 +24,10 @@ const Home: NextPage<HomeProps> = () => {
                 setEmployeeData(res.data.data.employee_data);
             }
         });
-    };
+    }, []);
 
     useEffect(() => {
-        if (__getCookie("hack_emp_id").cookieExists) {
-            fetchHacks();
-        } else {
-            message.warn("Login to continue");
-            router.replace("/");
-        }
+        fetchHacks();
     }, [fetchHacks]);
 
     const updateVotes = (hack_id: string) => {

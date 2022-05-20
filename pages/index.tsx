@@ -37,7 +37,7 @@ const Login: NextPage<LoginProps> = () => {
             <div className="login-card f-d f-h-c f-v-c f-vt">
                 <h2 className="h1-heading title">Hello Again!</h2>
                 <div className="body-medium text-c-d">
-                    Welcome back you've been <br /> missed
+                    Welcome back you&apos;ve been <br /> missed
                 </div>
 
                 <Form
